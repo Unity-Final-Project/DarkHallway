@@ -19,10 +19,10 @@ public class MazeSpawner : MonoBehaviour {
 	public GameObject Floor = null;
 	public GameObject Wall = null;
 	public GameObject Pillar = null;
-	public int Rows = 5;
-	public int Columns = 5;
-	public float CellWidth = 5;
-	public float CellHeight = 5;
+	public int Rows = 10;
+	public int Columns = 10;
+	public float CellWidth = 10;
+	public float CellHeight = 10;
 	public bool AddGaps = true;
 	public GameObject GoalPrefab = null;
 	public GameObject CharacterPrefab = null;
