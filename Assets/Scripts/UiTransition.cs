@@ -6,11 +6,12 @@ using Cinemachine;
 public class UiTransition : MonoBehaviour
 {
     public CinemachineVirtualCamera currentCamera;
+    public CinemachineVirtualCamera menuCamera; 
 
     public void Start()
     {
         currentCamera.Priority++;
-        Debug.Log("...."+currentCamera.Priority);
+        Debug.Log("Current Camera Priority: " + currentCamera.Priority);
     }
 
     public void UpdateCamera(CinemachineVirtualCamera target)
@@ -18,7 +19,7 @@ public class UiTransition : MonoBehaviour
         currentCamera.Priority--;
         currentCamera = target;
         currentCamera.Priority++;
-        Debug.Log(currentCamera.Priority);
+        Debug.Log("Updated Camera Priority: " + currentCamera.Priority);
     }
 
     void Update()
@@ -26,6 +27,9 @@ public class UiTransition : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             currentCamera.Priority--;
+            currentCamera = menuCamera;
+            currentCamera.Priority++;
+            Debug.Log("Switched to Menu Camera with Priority: " + currentCamera.Priority);
         }
     }
 }
