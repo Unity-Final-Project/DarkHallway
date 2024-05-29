@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 19722097}
   - component: {fileID: 19722096}
   - component: {fileID: 19722100}
+  - component: {fileID: 19722101}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -243,6 +244,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCamera: {fileID: 1100264518}
   menuCamera: {fileID: 1100264518}
+--- !u!114 &19722101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19722095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d521f907dd3ed74aabc70529f70711e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myDoor: {fileID: 71774174}
+  openTrigger: 1
 --- !u!1 &67267720
 GameObject:
   m_ObjectHideFlags: 0
@@ -1001,8 +1016,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 224980752}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 173.9}
-  m_LocalScale: {x: 80.13241, y: 56.78169, z: -101.4}
+  m_LocalPosition: {x: 0, y: 0, z: 193.7}
+  m_LocalScale: {x: 80.13241, y: 56.78169, z: -144.30234}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1256415166}
@@ -1083,130 +1098,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 224980752}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &299280758
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 299280759}
-  - component: {fileID: 299280762}
-  - component: {fileID: 299280761}
-  - component: {fileID: 299280760}
-  - component: {fileID: 299280763}
-  m_Layer: 5
-  m_Name: DoorOpen
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &299280759
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 299280758}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 111.92}
-  m_LocalScale: {x: 25.069883, y: 37.510944, z: 13.6}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1228833339}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -960.6, y: -519.3497}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!65 &299280760
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 299280758}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &299280761
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 299280758}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &299280762
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 299280758}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &299280763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 299280758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d521f907dd3ed74aabc70529f70711e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myDoor: {fileID: 71774174}
-  openTrigger: 1
 --- !u!1001 &349260295
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1237,7 +1128,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c3a2e9c7a879b7d41b29957e6f9ed6c0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.3998328
+      value: -0.387
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c3a2e9c7a879b7d41b29957e6f9ed6c0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3102,7 +2993,7 @@ Transform:
   m_GameObject: {fileID: 1004670032}
   serializedVersion: 2
   m_LocalRotation: {x: -0.041638255, y: -0.017279172, z: 0.00072020537, w: 0.9989831}
-  m_LocalPosition: {x: -959.6, y: -519.79, z: 13.39}
+  m_LocalPosition: {x: -959.62, y: -519.76, z: 13.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3399,7 +3290,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1196126553}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.07774921, y: 0.793842, z: -0.10388586, w: 0.59411925}
+  m_LocalRotation: {x: 0.0777492, y: 0.793842, z: -0.10388585, w: 0.59411925}
   m_LocalPosition: {x: -943.1, y: -517.5, z: -139.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3644,7 +3535,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 71774170}
-  - {fileID: 299280759}
   m_Father: {fileID: 362381748}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -4210,7 +4100,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1330162471}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.016760549, y: -0.74813986, z: 0.018911172, w: 0.6630598}
+  m_LocalRotation: {x: 0.01676055, y: -0.74813986, z: 0.018911172, w: 0.6630598}
   m_LocalPosition: {x: -942.21, y: -520.06, z: -216.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4830,9 +4720,21 @@ MonoBehaviour:
         m_MethodName: UpdateCamera
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1673855660}
+          m_ObjectArgument: {fileID: 1004670034}
           m_ObjectArgumentAssemblyTypeName: Cinemachine.CinemachineVirtualCamera,
             Cinemachine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 19722101}
+        m_TargetAssemblyTypeName: DoorTrigger, Assembly-CSharp
+        m_MethodName: TriggerDoorOpen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -5034,7 +4936,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1673855658}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.037309926, y: -0.008678218, z: -0.0003240215, w: 0.999266}
+  m_LocalRotation: {x: -0.037309907, y: -0.008678212, z: -0.00032402104, w: 0.999266}
   m_LocalPosition: {x: -959.3, y: -521.1, z: -4.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5375,6 +5277,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 19722101}
+        m_TargetAssemblyTypeName: DoorTrigger, Assembly-CSharp
+        m_MethodName: TriggerDoorOpen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1743579399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5504,6 +5418,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 1004670034}
           m_ObjectArgumentAssemblyTypeName: Cinemachine.CinemachineVirtualCamera,
             Cinemachine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 19722101}
+        m_TargetAssemblyTypeName: DoorTrigger, Assembly-CSharp
+        m_MethodName: TriggerDoorOpen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -6244,8 +6170,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2090995454}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.037309926, y: -0.008678218, z: -0.0003240215, w: 0.999266}
-  m_LocalPosition: {x: 0.7000122, y: 18.900024, z: -4.1}
+  m_LocalRotation: {x: -0.041638255, y: -0.017279172, z: 0.00072020537, w: 0.9989831}
+  m_LocalPosition: {x: 0.38000488, y: 20.23999, z: 13.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
