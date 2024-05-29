@@ -7,7 +7,8 @@ MonoImporter:
   - Floor: {fileID: 3910277403906647348, guid: 577fb379d770b684a9c54ceadbc10d7d, type: 3}
   - Wall: {fileID: 100000, guid: 338a423d70b874743b61e6bf69184e50, type: 3}
   - Pillar: {fileID: 100000, guid: de815e9dc2d95a948939d83cfaa32a3d, type: 3}
-  - GoalPrefab: {instanceID: 0}
+  - GoalPrefab: {fileID: 3129200342344496425, guid: 3e29573f06c0a7e4fa986fff41de17af, type: 3}
+  - CharacterPrefab: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
