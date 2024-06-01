@@ -34,4 +34,13 @@ public class SceneLoader : MonoBehaviour
         int previousSceneIndex = (currentSceneIndex - 1 + SceneManager.sceneCountInBuildSettings) % SceneManager.sceneCountInBuildSettings;
         SceneManager.LoadScene(previousSceneIndex);
     }
+
+    public void QuitGame()
+    {
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+
+        Application.Quit();
+        #endif
+    }
 }

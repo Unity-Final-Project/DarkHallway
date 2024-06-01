@@ -8,7 +8,6 @@ public class LoadingScreenController : MonoBehaviour
 
     void Start()
     {
-        // Find the SceneLoader in the scene
         sceneLoader = FindObjectOfType<SceneLoader>();
     }
 
