@@ -8,7 +8,7 @@ public class CoinRotation : MonoBehaviour
     void Update()
     {
         // Rotate the coin around its Y axis
-        transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
+        transform.Rotate(Vector3.back, rotationSpeed * Time.deltaTime);
     }
 
     // This method is called when another collider enters the trigger collider

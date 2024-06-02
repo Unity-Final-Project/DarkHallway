@@ -1888,9 +1888,21 @@ MonoBehaviour:
         m_MethodName: UpdateCamera
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1673855660}
+          m_ObjectArgument: {fileID: 1004670034}
           m_ObjectArgumentAssemblyTypeName: Cinemachine.CinemachineVirtualCamera,
             Cinemachine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 19722101}
+        m_TargetAssemblyTypeName: DoorTrigger, Assembly-CSharp
+        m_MethodName: TriggerDoorOpen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3290,7 +3302,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1196126553}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0777492, y: 0.793842, z: -0.10388585, w: 0.59411925}
+  m_LocalRotation: {x: 0.07774921, y: 0.793842, z: -0.103885844, w: 0.5941193}
   m_LocalPosition: {x: -943.1, y: -517.5, z: -139.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4100,7 +4112,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1330162471}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.01676055, y: -0.74813986, z: 0.018911172, w: 0.6630598}
+  m_LocalRotation: {x: 0.016760549, y: -0.74813986, z: 0.018911172, w: 0.6630598}
   m_LocalPosition: {x: -942.21, y: -520.06, z: -216.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4936,7 +4948,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1673855658}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.037309907, y: -0.008678212, z: -0.00032402104, w: 0.999266}
+  m_LocalRotation: {x: -0.0373099, y: -0.008678184, z: -0.00032401987, w: 0.999266}
   m_LocalPosition: {x: -959.3, y: -521.1, z: -4.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6170,8 +6182,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2090995454}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.041638255, y: -0.017279172, z: 0.00072020537, w: 0.9989831}
-  m_LocalPosition: {x: 0.38000488, y: 20.23999, z: 13.18}
+  m_LocalRotation: {x: -0.0373099, y: -0.008678184, z: -0.00032401987, w: 0.999266}
+  m_LocalPosition: {x: 0.7000122, y: 18.900024, z: -4.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
