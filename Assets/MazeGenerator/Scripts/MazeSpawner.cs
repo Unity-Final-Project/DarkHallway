@@ -1,6 +1,5 @@
 ﻿using Unity.AI.Navigation;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class MazeSpawner : MonoBehaviour
 {
@@ -114,7 +113,6 @@ public class MazeSpawner : MonoBehaviour
             Debug.LogError("Goal cell coordinates are out of bounds.");
         }
 
-        int wallCounter = 0; // Counter to keep track of the number of walls
 
         // Instantiate Maze
         for (int row = 0; row < Rows; row++)
@@ -142,45 +140,31 @@ public class MazeSpawner : MonoBehaviour
                 {
                     tmp = Instantiate(Wall, new Vector3(x + CellWidth / 2, 0, z), Quaternion.Euler(0, 90, 0));
                     tmp.transform.parent = transform;
-                    wallCounter++;
-                    if (wallCounter % 2 == 0 && LampPrefab != null) // Place lamp every ten walls
-                    {
-                        tmp = Instantiate(LampPrefab, new Vector3(x + CellWidth / 2, 2, z), Quaternion.Euler(0, 90, 0)); // Rotate by 90 degrees
-                        tmp.transform.parent = transform;
-                    }
+                
                 }
                 if (cell.WallFront)
                 {
                     tmp = Instantiate(Wall, new Vector3(x, 0, z + CellHeight / 2), Quaternion.identity);
                     tmp.transform.parent = transform;
-                    wallCounter++;
-                    if (wallCounter % 2 == 0 && LampPrefab != null) // Place lamp every ten walls
-                    {
-                        tmp = Instantiate(LampPrefab, new Vector3(x, 2, z + CellHeight / 2), Quaternion.Euler(0, 180, 0)); // Rotate by 180 degrees
-                        tmp.transform.parent = transform;
-                    }
+
+                 
                 }
                 if (cell.WallLeft)
                 {
                     tmp = Instantiate(Wall, new Vector3(x - CellWidth / 2, 0, z), Quaternion.Euler(0, 270, 0));
                     tmp.transform.parent = transform;
-                    wallCounter++;
-                    if (wallCounter % 2 == 0 && LampPrefab != null) // Place lamp every ten walls
-                    {
-                        tmp = Instantiate(LampPrefab, new Vector3(x - CellWidth / 2, 2, z), Quaternion.Euler(0, 270, 0)); // Rotate by 270 degrees
-                        tmp.transform.parent = transform;
-                    }
+                 
                 }
                 if (cell.WallBack)
                 {
                     tmp = Instantiate(Wall, new Vector3(x, 0, z - CellHeight / 2), Quaternion.Euler(0, 180, 0));
                     tmp.transform.parent = transform;
-                    wallCounter++;
-                    if (wallCounter % 2 == 0 && LampPrefab != null) // Place lamp every ten walls
-                    {
-                        tmp = Instantiate(LampPrefab, new Vector3(x, 2, z - CellHeight / 2), Quaternion.identity); // No rotation needed
-                        tmp.transform.parent = transform;
-                    }
+                
+                }
+                if (cell.IsGoal && GoalPrefab != null)
+                {
+                    tmp = Instantiate(GoalPrefab, new Vector3(x, 1, z), Quaternion.Euler(90, 0, 0)) as GameObject;   
+                    tmp.transform.parent = transform;
                 }
 
             }
