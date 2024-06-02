@@ -1,11 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
-    public SceneLoader sceneLoader;
-    public float animationDelay = 3f; 
+    public float animationDelay = 3f;
 
     public void StartGame()
     {
@@ -14,11 +13,16 @@ public class MainMenuController : MonoBehaviour
 
     public void QuitGame()
     {
-        sceneLoader.QuitGame();
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
+
     private IEnumerator TransitionToLoadingScreen()
     {
         yield return new WaitForSeconds(animationDelay);
-        sceneLoader.LoadSceneByIndex(1);
+        SceneManager.LoadScene("LoadingScreen");
     }
 }
