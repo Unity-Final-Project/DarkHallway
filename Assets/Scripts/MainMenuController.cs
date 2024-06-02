@@ -23,6 +23,6 @@ public class MainMenuController : MonoBehaviour
     private IEnumerator TransitionToLoadingScreen()
     {
         yield return new WaitForSeconds(animationDelay);
-        SceneManager.LoadScene("LoadingScreen");
+        SceneManager.LoadScene("LoadingScene1");
     }
 }
