@@ -203,8 +203,8 @@ public class MazeSpawner : MonoBehaviour
 
     private void SpawnCharacterAtStart()
     {
-        int startX = 10;
-        int startZ = 10;
+        int startX = 0;
+        int startZ = 0;
         float x = startX * (CellWidth + (AddGaps ? .2f : 0));
         float z = startZ * (CellHeight + (AddGaps ? .2f : 0));
         GameObject character = Instantiate(CharacterPrefab, new Vector3(x, 1, z), Quaternion.identity);

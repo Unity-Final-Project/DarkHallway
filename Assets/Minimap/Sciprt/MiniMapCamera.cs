@@ -4,13 +4,13 @@ public class MinimapCamera : MonoBehaviour
 {
     public Camera minimapCamera; // Reference to the minimap camera
     private FirstPersonController Player;
-    public Vector3 offset = new Vector3(0, 50, 0); // Offset from the player's position
+    public Vector3 offset = new Vector3(0, 20, 0); // Offset from the player's position
 
     // Define the map boundaries
-    public float mapMinX = -1f; // Minimum X coordinate
-    public float mapMaxX = 1f;  // Maximum X coordinate
-    public float mapMinZ = -1f; // Minimum Z coordinate
-    public float mapMaxZ = 1f;  // Maximum Z coordinate
+    public float mapMinX = 27; // Minimum X coordinate
+    public float mapMaxX = 50;  // Maximum X coordinate
+    public float mapMinZ = 27; // Minimum Z coordinate
+    public float mapMaxZ = 50;  // Maximum Z coordinate
 
     void Awake()
     {
@@ -36,7 +36,7 @@ public class MinimapCamera : MonoBehaviour
             if (Player != null)
             {
                 // Set the minimap camera's initial position to the player's position with an offset
-                minimapCamera.transform.position = ClampPosition(Player.transform.position);
+                minimapCamera.transform.position = ClampPosition(Player.transform.position + offset);
                 // Set the minimap camera's rotation to look straight down
                 minimapCamera.transform.rotation = Quaternion.Euler(90, 0, 0);
             }
@@ -59,8 +59,13 @@ public class MinimapCamera : MonoBehaviour
         }
         else
         {
+            if(minimapCamera == null)
+            {
+                minimapCamera = GetComponent<Camera>();
+            }
             // Set the minimap camera's position to follow the player with an offset, and clamp it within the map boundaries
             minimapCamera.transform.position = ClampPosition(Player.transform.position + offset);
+            Debug.Log("Player position: " + Player.transform.position);
         }
     }
 
