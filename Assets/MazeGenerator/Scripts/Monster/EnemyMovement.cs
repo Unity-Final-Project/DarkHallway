@@ -53,9 +53,7 @@ public class EnemyMovement : MonoBehaviour
             Vector3 posPlayer = playerMovement.transform.position;
             if (Vector3.Distance(posEnemy, posPlayer) < distance)
             {
-                Vector3 direction = (playerMovement.transform.position - transform.position).normalized;
-                Vector3 moveVector = direction * enemyAgent.speed * Time.deltaTime;
-                enemyAgent.Move(moveVector);
+                enemyAgent.SetDestination(playerMovement.transform.position);
                 StartBlend();
             }
             else
