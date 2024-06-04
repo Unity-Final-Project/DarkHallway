@@ -71,8 +71,8 @@ public class PauseMenuController : MonoBehaviour
 
     public void OnExitButtonClicked()
     {
-        SceneManager.LoadScene("MainMenu");
         Time.timeScale = 1;
+        SceneManager.LoadScene("MainMenu");
         Debug.Log("Exit is clicked");
     }
 }
