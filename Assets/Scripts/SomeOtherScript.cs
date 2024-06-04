@@ -8,7 +8,6 @@ public class SomeOtherScript : MonoBehaviour
 
     void Start()
     {
-        // Find the SceneLoader in the scene
         sceneLoader = FindObjectOfType<SceneLoader>();
     }
 

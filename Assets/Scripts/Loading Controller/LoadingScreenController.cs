@@ -13,10 +13,8 @@ public class LoadingScreenController : MonoBehaviour
 
     void Update()
     {
-        // Check if any key is pressed
         if (Input.anyKeyDown)
         {
-            // Load Level 1 by its index (assuming it's at index 2)
             sceneLoader.LoadSceneByIndex(2);
         }
     }
