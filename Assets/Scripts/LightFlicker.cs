@@ -36,7 +36,7 @@ public class NewBehaviourScript : MonoBehaviour
         if (Mathf.Approximately(areaLight.intensity, targetIntensity))
         {
             targetIntensity = Random.Range(minIntensity, maxIntensity);
-            changeSpeed = Random.Range(flickerSpeed * 0.5f, flickerSpeed * 1.5f);
+            changeSpeed = Random.Range(flickerSpeed * 0.2f, flickerSpeed * 0.1f);
         }
 
         areaLight.intensity = Mathf.MoveTowards(areaLight.intensity, targetIntensity, changeSpeed * Time.deltaTime);

@@ -1,9 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using Unity.AI.Navigation;
+using UnityEngine;
 
-//<summary>
-//Game object, that creates maze and instantiates it in scene
-//</summary>
 public class MazeSpawner : MonoBehaviour
 {
     public enum MazeGenerationAlgorithm
@@ -23,25 +20,51 @@ public class MazeSpawner : MonoBehaviour
     public GameObject Pillar = null;
     public GameObject GoalPrefab = null;
     public GameObject CharacterPrefab = null;
+    public GameObject EnemyPrefab = null;
+    public GameObject CeilingPrefab = null; 
+    public GameObject LampPrefab = null; 
+    public GameObject AudioSourceBackGround = null;
     public int Rows = 10;
     public int Columns = 10;
     public float CellWidth = 10;
     public float CellHeight = 10;
     public bool AddGaps = true;
-    
+    public static int TotalPoints = 0;
 
     private BasicMazeGenerator mMazeGenerator = null;
+    private NavMeshSurface navMeshSurface;
 
     void Awake()
-
     {
+        // Play Background Music
+        if(AudioSourceBackGround == null)
+        {
+
+            AudioSourceBackGround = GameObject.Find("BackgroundMusic");
+        }
+        else
+        {
+        AudioSourceBackGround.GetComponent<AudioSource>().Play();
+        }
+
+        // Get or add the NavMeshSurface component
+        navMeshSurface = gameObject.GetComponent<NavMeshSurface>();
+        if (navMeshSurface == null)
+        {
+            navMeshSurface = gameObject.AddComponent<NavMeshSurface>();
+        }
+
+        // Set the layer mask to exclude obstacles (assuming layer 8 is "Obstacle")
+        navMeshSurface.layerMask = ~LayerMask.GetMask("Obstacle");
+
+        // Setup GoalPrefab
         if (GoalPrefab != null)
         {
             // Instantiate the GoalPrefab
         }
         else
         {
-            // Find a GameObject named "Point"
+            // Find a GameObject named "PirateCoin"
             GameObject pointObject = GameObject.Find("PirateCoin");
 
             if (pointObject != null)
@@ -55,11 +78,13 @@ public class MazeSpawner : MonoBehaviour
             }
         }
 
-
+        // Set Random Seed if not FullRandom
         if (!FullRandom)
         {
             Random.seed = RandomSeed;
         }
+
+        // Select Maze Generation Algorithm
         switch (Algorithm)
         {
             case MazeGenerationAlgorithm.PureRecursive:
@@ -79,35 +104,30 @@ public class MazeSpawner : MonoBehaviour
                 break;
         }
         mMazeGenerator.GenerateMaze();
-        // Set the goal cell to the middle of the maze
+
+        // Set Goal Cell
         int goalRow = Rows / 3;
         int goalColumn = Columns / 3;
         if (goalRow < Rows && goalColumn < Columns)
         {
-            Debug.Log($" row {Rows}, column {Columns}");
             MazeCell goalCell = mMazeGenerator.GetMazeCell(goalRow, goalColumn);
             goalCell.IsGoal = true;
-            Debug.Log($"Goal cell set at row {goalRow}, column {goalColumn}");
-
-            // Verify that the goal cell was set correctly
-            Debug.Log($"goalCell.IsGoal: {goalCell.IsGoal}");
             if (GoalPrefab != null)
             {
-
                 Debug.Log($"GoalPrefab: {GoalPrefab.name}");
             }
             else
             {
                 Debug.LogError("GoalPrefab is null.");
             }
-
-
         }
         else
         {
             Debug.LogError("Goal cell coordinates are out of bounds.");
         }
 
+
+        // Instantiate Maze
         for (int row = 0; row < Rows; row++)
         {
             for (int column = 0; column < Columns; column++)
@@ -116,35 +136,57 @@ public class MazeSpawner : MonoBehaviour
                 float z = row * (CellHeight + (AddGaps ? .2f : 0));
                 MazeCell cell = mMazeGenerator.GetMazeCell(row, column);
                 GameObject tmp;
-                tmp = Instantiate(Floor, new Vector3(x, 0, z), Quaternion.Euler(0, 0, 0)) as GameObject;
+
+                // Instantiate Floor
+                tmp = Instantiate(Floor, new Vector3(x, 0, z), Quaternion.identity);
                 tmp.transform.parent = transform;
+                
+                //Instantiate Ceiling
+                if (CeilingPrefab != null)
+                {
+                    tmp = Instantiate(CeilingPrefab, new Vector3(x, 4, z), Quaternion.identity);
+                    tmp.transform.parent = transform;
+                }
+
+                // Instantiate Walls
                 if (cell.WallRight)
                 {
-                    tmp = Instantiate(Wall, new Vector3(x + CellWidth / 2, 0, z) + Wall.transform.position, Quaternion.Euler(0, 90, 0)) as GameObject;// right
+                    tmp = Instantiate(Wall, new Vector3(x + CellWidth / 2, 0, z), Quaternion.Euler(0, 90, 0));
                     tmp.transform.parent = transform;
+                
                 }
                 if (cell.WallFront)
                 {
-                    tmp = Instantiate(Wall, new Vector3(x, 0, z + CellHeight / 2) + Wall.transform.position, Quaternion.Euler(0, 0, 0)) as GameObject;// front
+                    tmp = Instantiate(Wall, new Vector3(x, 0, z + CellHeight / 2), Quaternion.identity);
                     tmp.transform.parent = transform;
+
+                 
                 }
                 if (cell.WallLeft)
                 {
-                    tmp = Instantiate(Wall, new Vector3(x - CellWidth / 2, 0, z) + Wall.transform.position, Quaternion.Euler(0, 270, 0)) as GameObject;// left
+                    tmp = Instantiate(Wall, new Vector3(x - CellWidth / 2, 0, z), Quaternion.Euler(0, 270, 0));
                     tmp.transform.parent = transform;
+                 
                 }
                 if (cell.WallBack)
                 {
-                    tmp = Instantiate(Wall, new Vector3(x, 0, z - CellHeight / 2) + Wall.transform.position, Quaternion.Euler(0, 180, 0)) as GameObject;// back
+                    tmp = Instantiate(Wall, new Vector3(x, 0, z - CellHeight / 2), Quaternion.Euler(0, 180, 0));
                     tmp.transform.parent = transform;
+                
                 }
-                if (cell.IsGoal && GoalPrefab != null )
+                if (cell.IsGoal && GoalPrefab != null)
                 {
-                    tmp = Instantiate(GoalPrefab, new Vector3(x, 1, z), Quaternion.Euler(90, 0, 0)) as GameObject;
+                    tmp = Instantiate(GoalPrefab, new Vector3(x, 1, z), Quaternion.Euler(90, 0, 0)) as GameObject;   
                     tmp.transform.parent = transform;
+                    TotalPoints++;
                 }
+
             }
         }
+
+
+
+        // Instantiate Pillars
         if (Pillar != null)
         {
             for (int row = 0; row < Rows + 1; row++)
@@ -153,17 +195,27 @@ public class MazeSpawner : MonoBehaviour
                 {
                     float x = column * (CellWidth + (AddGaps ? .2f : 0));
                     float z = row * (CellHeight + (AddGaps ? .2f : 0));
-                    GameObject tmp = Instantiate(Pillar, new Vector3(x - CellWidth / 2, 0, z - CellHeight / 2), Quaternion.identity) as GameObject;
+                    GameObject tmp = Instantiate(Pillar, new Vector3(x - CellWidth / 2, 0, z - CellHeight / 2), Quaternion.identity);
                     tmp.transform.parent = transform;
                 }
             }
         }
 
+        // Spawn Character
         if (CharacterPrefab != null)
         {
             SpawnCharacterAtStart();
         }
+        if (EnemyPrefab != null)
+        {
+            SpawnEnemyAtTheEnd();
+        }
+
+        // Bake the NavMesh after the maze is generated
+        navMeshSurface.BuildNavMesh();
+
     }
+
     private void SpawnCharacterAtStart()
     {
         int startX = 0;
@@ -173,4 +225,15 @@ public class MazeSpawner : MonoBehaviour
         GameObject character = Instantiate(CharacterPrefab, new Vector3(x, 1, z), Quaternion.identity);
         character.transform.position = new Vector3(x, 1, z);
     }
+    private void SpawnEnemyAtTheEnd()
+    {
+        int endX = Rows - 1;
+        int endZ = Columns - 1;
+        float x = endX * (CellWidth + (AddGaps ? .2f : 0));
+        float z = endZ * (CellHeight + (AddGaps ? .2f : 0));
+        GameObject enemy = Instantiate(EnemyPrefab, new Vector3(x, 1, z), Quaternion.identity);
+        enemy.transform.position = new Vector3(x, 1, z);
+    }
+
+
 }
