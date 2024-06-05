@@ -23,17 +23,30 @@ public class MazeSpawner : MonoBehaviour
     public GameObject EnemyPrefab = null;
     public GameObject CeilingPrefab = null; 
     public GameObject LampPrefab = null; 
+    public GameObject AudioSourceBackGround = null;
     public int Rows = 10;
     public int Columns = 10;
     public float CellWidth = 10;
     public float CellHeight = 10;
     public bool AddGaps = true;
+    public static int TotalPoints = 0;
 
     private BasicMazeGenerator mMazeGenerator = null;
     private NavMeshSurface navMeshSurface;
 
     void Awake()
     {
+        // Play Background Music
+        if(AudioSourceBackGround == null)
+        {
+
+            AudioSourceBackGround = GameObject.Find("BackgroundMusic");
+        }
+        else
+        {
+        AudioSourceBackGround.GetComponent<AudioSource>().Play();
+        }
+
         // Get or add the NavMeshSurface component
         navMeshSurface = gameObject.GetComponent<NavMeshSurface>();
         if (navMeshSurface == null)
@@ -165,6 +178,7 @@ public class MazeSpawner : MonoBehaviour
                 {
                     tmp = Instantiate(GoalPrefab, new Vector3(x, 1, z), Quaternion.Euler(90, 0, 0)) as GameObject;   
                     tmp.transform.parent = transform;
+                    TotalPoints++;
                 }
 
             }
@@ -199,6 +213,7 @@ public class MazeSpawner : MonoBehaviour
 
         // Bake the NavMesh after the maze is generated
         navMeshSurface.BuildNavMesh();
+
     }
 
     private void SpawnCharacterAtStart()
