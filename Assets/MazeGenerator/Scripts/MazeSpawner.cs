@@ -24,6 +24,7 @@ public class MazeSpawner : MonoBehaviour
     public GameObject CeilingPrefab = null; 
     public GameObject LampPrefab = null; 
     public GameObject AudioSourceBackGround = null;
+    public GameObject losePanel = null;
     public int Rows = 10;
     public int Columns = 10;
     public float CellWidth = 10;
@@ -36,6 +37,7 @@ public class MazeSpawner : MonoBehaviour
 
     void Awake()
     {
+        FirstPersonController.isAlive = true;
         // Play Background Music
         if(AudioSourceBackGround == null)
         {
@@ -210,6 +212,7 @@ public class MazeSpawner : MonoBehaviour
         {
             SpawnEnemyAtTheEnd();
         }
+        SetLosePanelInactive();
 
         // Bake the NavMesh after the maze is generated
         navMeshSurface.BuildNavMesh();
@@ -234,6 +237,10 @@ public class MazeSpawner : MonoBehaviour
         GameObject enemy = Instantiate(EnemyPrefab, new Vector3(x, 1, z), Quaternion.identity);
         enemy.transform.position = new Vector3(x, 1, z);
     }
+    private void SetLosePanelInactive()
+    {
+        losePanel.SetActive(false);
 
+    }
 
 }

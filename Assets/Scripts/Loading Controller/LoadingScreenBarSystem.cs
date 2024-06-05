@@ -7,15 +7,15 @@ public class LoadingScreenBarSystem : MonoBehaviour
 {
     public GameObject bar;
     public Text loadingText;
-    public Text continueText; // Text indicating to press any keys to continue
+    public Text continueText;
     public bool backGroundImageAndLoop;
     public float LoopTime;
     public GameObject[] backgroundImages;
     [Range(0, 1f)] public float vignetteEfectVolue;
-    public float loadingDuration = 5f; // Duration for the simulated loading
+    public float loadingDuration = 5f;
     private float timer;
     private bool isLoading = false;
-    private int targetSceneIndex = 2; // The scene index of the level to load
+    private int targetSceneIndex = 2;
     private AsyncOperation async;
 
     private void Start()
@@ -26,7 +26,7 @@ public class LoadingScreenBarSystem : MonoBehaviour
         if (backGroundImageAndLoop)
             StartCoroutine(TransitionImage());
 
-        continueText.enabled = false; // Hide the "Press any keys to continue" text initially
+        continueText.enabled = false;
         StartLoadingNextScene();
     }
 
@@ -51,8 +51,7 @@ public class LoadingScreenBarSystem : MonoBehaviour
             if (progress >= 1f)
             {
                 isLoading = false;
-                continueText.enabled = true; // Show the "Press any keys to continue" text when loading reaches 100%
-                // Enable the logic to listen for any key press to continue
+                continueText.enabled = true;
                 StartCoroutine(WaitForAnyKeyPress());
             }
         }
@@ -77,15 +76,13 @@ public class LoadingScreenBarSystem : MonoBehaviour
         async = SceneManager.LoadSceneAsync(sceneNo);
         async.allowSceneActivation = false;
 
-        // Wait for the duration of the simulated loading
         yield return new WaitForSeconds(loadingDuration);
         async.allowSceneActivation = true;
     }
 
     IEnumerator WaitForAnyKeyPress()
     {
-        yield return new WaitUntil(() => Input.anyKeyDown); // Wait until any key is pressed
-        // Transition to level 1
+        yield return new WaitUntil(() => Input.anyKeyDown);
         SceneManager.LoadScene(targetSceneIndex);
     }
 }

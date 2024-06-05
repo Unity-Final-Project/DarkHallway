@@ -39,6 +39,8 @@ public class FirstPersonController : MonoBehaviour
     private float pitch = 0.0f;
     private Image crosshairObject;
 
+    public static bool isAlive = true;
+
     #region Camera Zoom Variables
 
     public bool enableZoom = true;
@@ -556,7 +558,7 @@ public class FirstPersonController : MonoBehaviour
             }else if(collision.gameObject.tag == "Enemy")
             {
                 Debug.Log("Enemy caught up, Dead");
-                //Destroy(gameObject);
+                isAlive = false;
             }
         }
     }

@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &61879746 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1139752740429076, guid: 5ebad8a41bbacbe419403ab6a0c52078, type: 3}
-  m_PrefabInstance: {fileID: 2023374163}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &386086144
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,19 +319,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1074060449}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d09316216274ac94bbbbdc495123c59f, type: 3}
+  m_Script: {fileID: 11500000, guid: b268486aa5971d1478627a1b8055caff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bar: {fileID: 61879746}
+  bar: {fileID: 2023374166}
   loadingText: {fileID: 1362754764}
   continueText: {fileID: 1555693385}
-  backGroundImageAndLoop: 1
-  LoopTime: 5
-  backgroundImages:
-  - {fileID: 1611665879}
-  - {fileID: 1558225768}
-  - {fileID: 1435455787}
-  vignetteEfectVolue: 0.78
+  backGroundImageAndLoop: 0
+  LoopTime: 0
+  backgroundImages: []
+  vignetteEfectVolue: 0
   loadingDuration: 5
 --- !u!114 &1362754764 stripped
 MonoBehaviour:
@@ -1061,6 +1053,11 @@ RectTransform:
 --- !u!1 &2023374165 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1360750037830378, guid: 5ebad8a41bbacbe419403ab6a0c52078, type: 3}
+  m_PrefabInstance: {fileID: 2023374163}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2023374166 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1139752740429076, guid: 5ebad8a41bbacbe419403ab6a0c52078, type: 3}
   m_PrefabInstance: {fileID: 2023374163}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2026187306

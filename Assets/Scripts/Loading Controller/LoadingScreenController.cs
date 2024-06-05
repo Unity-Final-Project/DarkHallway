@@ -5,19 +5,24 @@ using UnityEngine;
 public class LoadingScreenController : MonoBehaviour
 {
     private SceneLoader sceneLoader;
+    private bool isLoadingComplete = false;
 
     void Start()
     {
         sceneLoader = FindObjectOfType<SceneLoader>();
+        sceneLoader.OnLoadingComplete += HandleLoadingComplete;
     }
 
     void Update()
     {
-        // Check if any key is pressed
-        if (Input.anyKeyDown)
+        if (isLoadingComplete && Input.anyKeyDown)
         {
-            // Load Level 1 by its index (assuming it's at index 2)
             sceneLoader.LoadSceneByIndex(2);
         }
+    }
+
+    private void HandleLoadingComplete()
+    {
+        isLoadingComplete = true;
     }
 }
