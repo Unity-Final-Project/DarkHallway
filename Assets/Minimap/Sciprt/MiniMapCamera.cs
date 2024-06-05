@@ -65,7 +65,6 @@ public class MinimapCamera : MonoBehaviour
             }
             // Set the minimap camera's position to follow the player with an offset, and clamp it within the map boundaries
             minimapCamera.transform.position = ClampPosition(Player.transform.position + offset);
-            Debug.Log("Player position: " + Player.transform.position);
         }
     }
 

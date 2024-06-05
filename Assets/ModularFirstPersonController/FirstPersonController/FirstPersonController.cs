@@ -21,7 +21,7 @@ public class FirstPersonController : MonoBehaviour
     #region Camera Movement Variables
 
     public Camera playerCamera;
-    public int coinPoint = 0;
+    public static int coinPoint = 0;
     public float fov = 60f;
     public bool invertCamera = false;
     public bool cameraCanMove = true;
@@ -131,8 +131,14 @@ public class FirstPersonController : MonoBehaviour
 
     #endregion
 
+    #region Sound
+
+    private AudioSource audioSource;
+    private bool isRunning = false;
+    #endregion
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
 
         crosshairObject = GetComponentInChildren<Image>();
@@ -370,6 +376,8 @@ public class FirstPersonController : MonoBehaviour
 
         if (playerCanMove)
         {
+
+
             // Calculate how fast we should be moving
             Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
@@ -387,6 +395,9 @@ public class FirstPersonController : MonoBehaviour
             // All movement calculations shile sprint is active
             if (enableSprint && Input.GetKey(sprintKey) && sprintRemaining > 0f && !isSprintCooldown)
             {
+                //AudioManager.GetInstance().PlayMultiple(new string[] { "Breating", "Running" });
+                AudioManager.GetInstance().Play("RunningSound");
+
                 targetVelocity = transform.TransformDirection(targetVelocity) * sprintSpeed;
 
                 // Apply a force that attempts to reach our target velocity
@@ -401,7 +412,8 @@ public class FirstPersonController : MonoBehaviour
                 if (velocityChange.x != 0 || velocityChange.z != 0)
                 {
                     isSprinting = true;
-
+                    
+              
                     if (isCrouched)
                     {
                         Crouch();
@@ -418,6 +430,10 @@ public class FirstPersonController : MonoBehaviour
             // All movement calculations while walking
             else
             {
+                AudioManager.GetInstance().Stop();
+
+                // AudioManager.GetInstance().StopMultiple(new string[] { "Breating", "Running" });
+
                 isSprinting = false;
 
                 if (hideBarWhenFull && sprintRemaining == sprintDuration)
@@ -535,11 +551,12 @@ public class FirstPersonController : MonoBehaviour
             {
                Destroy(collision.gameObject);
                coinPoint++;
-                Debug.Log("Point: "+coinPoint);
+                var TotalPoints = MazeSpawner.TotalPoints;
+                Debug.Log("Point: "+coinPoint + " Total Point" + TotalPoints);  
             }else if(collision.gameObject.tag == "Enemy")
             {
-                Destroy(gameObject);
                 Debug.Log("Enemy caught up, Dead");
+                //Destroy(gameObject);
             }
         }
     }
