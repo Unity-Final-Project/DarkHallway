@@ -4,14 +4,16 @@ using UnityEngine.SceneManagement; // Required for scene management
 public class PauseMenuController : MonoBehaviour
 {
     public GameObject pauseMenuPanel;
-    public GameObject blurPanel;
+    public GameObject winPanel;
+    public GameObject losePanel;
 
     private bool isPaused = false;
 
     void Start()
     {
         pauseMenuPanel.SetActive(false);
-        blurPanel.SetActive(false);
+        winPanel.SetActive(false);
+        losePanel.SetActive(false);
     }
 
     void Update()
@@ -32,24 +34,44 @@ public class PauseMenuController : MonoBehaviour
     void PauseGame()
     {
         isPaused = true;
-        Time.timeScale = 0; 
+        Time.timeScale = 0;
         pauseMenuPanel.SetActive(true);
-        blurPanel.SetActive(true);
 
-        
+
         Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true; 
+        Cursor.visible = true;
     }
 
     void ResumeGame()
     {
         isPaused = false;
-        Time.timeScale = 1; 
+        Time.timeScale = 1;
         pauseMenuPanel.SetActive(false);
-        blurPanel.SetActive(false);
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    void WinGame()
+    {
+        isPaused = true;
+        Time.timeScale = 0;
+        winPanel.SetActive(true);
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Debug.Log("Player win");
+    }
+
+    void LoseGame()
+    {
+        isPaused = true;
+        Time.timeScale = 0;
+        losePanel.SetActive(true);
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Debug.Log("Player lose");
     }
 
     public void OnResumeButtonClicked()
@@ -74,5 +96,11 @@ public class PauseMenuController : MonoBehaviour
         Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
         Debug.Log("Exit is clicked");
+    }
+
+    public void NextLevel()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Level2");
     }
 }

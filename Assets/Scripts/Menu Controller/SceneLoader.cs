@@ -1,46 +1,80 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    public delegate void LoadingCompleteHandler();
+    public event LoadingCompleteHandler OnLoadingComplete;
+
     public void LoadSceneByName(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        StartCoroutine(LoadSceneAsync(sceneName));
     }
 
     public void LoadSceneByIndex(int sceneIndex)
     {
-        SceneManager.LoadScene(sceneIndex);
+        StartCoroutine(LoadSceneAsync(sceneIndex));
     }
 
     public void ReloadCurrentScene()
     {
         Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.name);
+        StartCoroutine(LoadSceneAsync(currentScene.name));
     }
 
     public void LoadNextScene()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = (currentSceneIndex + 1) % SceneManager.sceneCountInBuildSettings;
-        SceneManager.LoadScene(nextSceneIndex);
+        StartCoroutine(LoadSceneAsync(nextSceneIndex));
     }
 
     public void LoadPreviousScene()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int previousSceneIndex = (currentSceneIndex - 1 + SceneManager.sceneCountInBuildSettings) % SceneManager.sceneCountInBuildSettings;
-        SceneManager.LoadScene(previousSceneIndex);
+        StartCoroutine(LoadSceneAsync(previousSceneIndex));
     }
 
     public void QuitGame()
     {
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-
+#else
         Application.Quit();
-        #endif
+#endif
+    }
+
+    private IEnumerator LoadSceneAsync(string sceneName)
+    {
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneName);
+        asyncOperation.allowSceneActivation = false;
+
+        while (!asyncOperation.isDone)
+        {
+            if (asyncOperation.progress >= 0.9f)
+            {
+                OnLoadingComplete?.Invoke();
+                asyncOperation.allowSceneActivation = true;
+            }
+            yield return null;
+        }
+    }
+
+    private IEnumerator LoadSceneAsync(int sceneIndex)
+    {
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneIndex);
+        asyncOperation.allowSceneActivation = false;
+
+        while (!asyncOperation.isDone)
+        {
+            if (asyncOperation.progress >= 0.9f)
+            {
+                OnLoadingComplete?.Invoke();
+                asyncOperation.allowSceneActivation = true;
+            }
+            yield return null;
+        }
     }
 }
