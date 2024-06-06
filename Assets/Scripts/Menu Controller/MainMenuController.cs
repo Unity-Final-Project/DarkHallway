@@ -8,6 +8,7 @@ public class MainMenuController : MonoBehaviour
 
     public void StartGame()
     {
+        Debug.Log("Start button");
         StartCoroutine(TransitionToLoadingScreen());
     }
 
